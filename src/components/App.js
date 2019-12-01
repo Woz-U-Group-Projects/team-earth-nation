@@ -45,19 +45,46 @@ class App extends Component {
         constructor(props) {
        super(props) 
        this.state = { 
-          cryptocoins: [
-             { id: "BTC", name: "Bitcoin", price: "$"+BTCprice , supply: BTCsupply, marketcap: "$"+BTCmarketcap },
-             { id: "ETH", name: "Ethereum", price: "$"+ETHprice , supply: ETHsupply, marketcap: "$"+ETHmarketcap },
-             { id: "XRP", name: "Ripple", price: "$"+XRPprice , supply: XRPsupply, marketcap: "$"+XRPmarketcap },
-             { id: "USDT", name: "Tether", price: "$"+USDTprice , supply: USDTsupply, marketcap: "$"+USDTmarketcap },
-             { id: "BCH", name: "Bitcoin Cash", price: "$"+BCHprice , supply: BCHsupply, marketcap: "$"+BCHmarketcap },
-             { id: "LTC", name: "Litecoin", price: "$"+LTCprice , supply: LTCsupply, marketcap: "$"+LTCmarketcap },
-             { id: "EOS", name: "EOS", price: "$"+EOSprice , supply: EOSsupply, marketcap: "$"+EOSmarketcap },
-             { id: "BNB", name: "Binance Coin", price: "$"+BNBprice , supply: BNBsupply, marketcap: "$"+BNBmarketcap },
-             { id: "BSV", name: "Bitcoin SV", price: "$"+BSVprice , supply:  BSVsupply, marketcap: "$"+BSVmarketcap },
-             { id: "XLM", name: "Stellar", price: "$"+XLMprice , supply: XLMsupply, marketcap: "$"+XLMmarketcap }
+     cryptocoins: [
+             { id: "BTC", name: "Bitcoin", price: "$"+BTCprice , supply: BTCsupply, marketcap: BTCmarketcap },
+             { id: "ETH", name: "Ethereum", price: "$"+ETHprice , supply: ETHsupply, marketcap: ETHmarketcap },
+             { id: "XRP", name: "Ripple", price: "$"+XRPprice , supply: XRPsupply, marketcap: XRPmarketcap },
+             { id: "USDT", name: "Tether", price: "$"+USDTprice , supply: USDTsupply, marketcap: USDTmarketcap },
+             { id: "BCH", name: "Bitcoin Cash", price: "$"+BCHprice , supply: BCHsupply, marketcap: BCHmarketcap },
+             { id: "LTC", name: "Litecoin", price: "$"+LTCprice , supply: LTCsupply, marketcap: LTCmarketcap },
+             { id: "EOS", name: "EOS", price: "$"+EOSprice , supply: EOSsupply, marketcap: EOSmarketcap },
+             { id: "BNB", name: "Binance Coin", price: "$"+BNBprice , supply: BNBsupply, marketcap: BNBmarketcap },
+             { id: "BSV", name: "Bitcoin SV", price: "$"+BSVprice , supply:  BSVsupply, marketcap: BSVmarketcap },
+             { id: "XLM", name: "Stellar", price: "$"+XLMprice , supply: XLMsupply, marketcap: XLMmarketcap }
           ]
        }
+ 
+
+    function compareValues(key, order = 'asc') {
+        return function innerSort(a, b) {
+          if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {
+            return 0;
+          }
+      
+          const varA = (typeof a[key] === 'string')
+            ? a[key].toUpperCase() : a[key];
+          const varB = (typeof b[key] === 'string')
+            ? b[key].toUpperCase() : b[key];
+      
+          let comparison = 0;
+          if (varA > varB) {
+            comparison = 1;
+          } else if (varA < varB) {
+            comparison = -1;
+          }
+          return (
+            (order === 'desc') ? (comparison * -1) : comparison
+          );
+        };
+      }
+
+        this.state.cryptocoins.sort(compareValues('marketcap', 'desc'))
+
     }
 
     renderTableForCoinData() {
@@ -68,7 +95,7 @@ class App extends Component {
                  <td>{cryptocoins.name}</td>
                  <td>{cryptocoins.price}</td>
                  <td>{cryptocoins.supply}</td>
-                 <td>{cryptocoins.marketcap}</td>
+                 <td>${cryptocoins.marketcap}</td>
               </tr>
            )
            
