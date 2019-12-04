@@ -46,16 +46,16 @@ class App extends Component {
        super(props) 
        this.state = { 
      cryptocoins: [
-             { id: "BTC", name: "Bitcoin", price: "$"+BTCprice , supply: BTCsupply, marketcap: BTCmarketcap },
-             { id: "ETH", name: "Ethereum", price: "$"+ETHprice , supply: ETHsupply, marketcap: ETHmarketcap },
-             { id: "XRP", name: "Ripple", price: "$"+XRPprice , supply: XRPsupply, marketcap: XRPmarketcap },
-             { id: "USDT", name: "Tether", price: "$"+USDTprice , supply: USDTsupply, marketcap: USDTmarketcap },
-             { id: "BCH", name: "Bitcoin Cash", price: "$"+BCHprice , supply: BCHsupply, marketcap: BCHmarketcap },
-             { id: "LTC", name: "Litecoin", price: "$"+LTCprice , supply: LTCsupply, marketcap: LTCmarketcap },
-             { id: "EOS", name: "EOS", price: "$"+EOSprice , supply: EOSsupply, marketcap: EOSmarketcap },
-             { id: "BNB", name: "Binance Coin", price: "$"+BNBprice , supply: BNBsupply, marketcap: BNBmarketcap },
-             { id: "BSV", name: "Bitcoin SV", price: "$"+BSVprice , supply:  BSVsupply, marketcap: BSVmarketcap },
-             { id: "XLM", name: "Stellar", price: "$"+XLMprice , supply: XLMsupply, marketcap: XLMmarketcap }
+             { id: "BTC", name: "Bitcoin", price: "$" + BTCprice , supply: BTCsupply, marketcap: BTCmarketcap },
+             { id: "ETH", name: "Ethereum", price: "$" + ETHprice , supply: ETHsupply, marketcap: ETHmarketcap },
+             { id: "XRP", name: "Ripple", price: "$" + XRPprice , supply: XRPsupply, marketcap: XRPmarketcap },
+             { id: "USDT", name: "Tether", price: "$" + USDTprice , supply: USDTsupply, marketcap: USDTmarketcap },
+             { id: "BCH", name: "Bitcoin Cash", price: "$" + BCHprice , supply: BCHsupply, marketcap: BCHmarketcap },
+             { id: "LTC", name: "Litecoin", price: "$" + LTCprice , supply: LTCsupply, marketcap: LTCmarketcap },
+             { id: "EOS", name: "EOS", price: "$" + EOSprice , supply: EOSsupply, marketcap: EOSmarketcap },
+             { id: "BNB", name: "Binance Coin", price: "$" + BNBprice , supply: BNBsupply, marketcap: BNBmarketcap },
+             { id: "BSV", name: "Bitcoin SV", price: "$" + BSVprice , supply:  BSVsupply, marketcap: BSVmarketcap },
+             { id: "XLM", name: "Stellar", price: "$" + XLMprice , supply: XLMsupply, marketcap: XLMmarketcap }
           ]
        }
  
@@ -91,11 +91,11 @@ class App extends Component {
         return this.state.cryptocoins.map((cryptocoins) => {
            return (
               <tr key={cryptocoins.id}>
-                 <td>{cryptocoins.id}</td>
-                 <td>{cryptocoins.name}</td>
-                 <td>{cryptocoins.price}</td>
-                 <td>{cryptocoins.supply}</td>
-                 <td>${cryptocoins.marketcap}</td>
+                 <td style={{border: "1px solid #ddd", padding: "8px"}}>{cryptocoins.id}</td>
+                 <td style={{border: "1px solid #ddd", padding: "8px"}}>{cryptocoins.name}</td>
+                 <td style={{border: "1px solid #ddd", padding: "8px"}}>{cryptocoins.price}</td>
+                 <td style={{border: "1px solid #ddd", padding: "8px"}}>{cryptocoins.supply}</td>
+                 <td style={{border: "1px solid #ddd", padding: "8px"}}>${cryptocoins.marketcap}</td>
               </tr>
            )
            
@@ -106,20 +106,18 @@ class App extends Component {
      renderTableHeader() {
         let header = Object.keys(this.state.cryptocoins[0])
         return header.map((key, index) => {
-           return <th key={index}>{key.toUpperCase()}</th>
+           return <th key={index} style={{border: "1px solid #ddd", paddingTop: "12px", paddingBottom: "12px", textAlign: "center", backgroundColor: "#4CAF50", color: "white"}}>{key.toUpperCase()}</th>
         })
      }
 
     render() { 
         return (
            <div>
-              <h1>Top 10 Coins</h1>
-              <hr></hr>
-              <table id="cryptocoins">
-               <tbody>
+              <h1 id="title" style={{textAlign: "center", fontFamily: "arial, sans-serif"}}>Top 10 Coins</h1>
+              <table id="cryptocoins" style={{textAlign: "center", fontFamily: "Arial, Helvetica, sans-serif", borderCollapse: "collapse", border: "3px solid #ddd", width: "100%"}}>
+               <tbody>  
                     <tr>{this.renderTableHeader()}</tr>
                   {this.renderTableForCoinData()}
-                
                </tbody>
             </table>
            </div>
